@@ -3,6 +3,11 @@ DEEP-OC-semseg
 
 ![DEEP-Hybrid-DataCloud logo](https://docs.deep-hybrid-datacloud.eu/en/latest/_static/logo.png)
 
+----
+**Be careful, 'test' branch!**
+
+----
+
 This is a container that will simply run the DEEP as a Service API component,
 with semseg (src: [semseg](https://github.com/vykozlov/semseg)).
 
