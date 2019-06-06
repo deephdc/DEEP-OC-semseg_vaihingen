@@ -4,7 +4,7 @@ DEEP-OC-semseg
 ![DEEP-Hybrid-DataCloud logo](https://docs.deep-hybrid-datacloud.eu/en/latest/_static/logo.png)
 
 This is a container that will simply run the DEEP as a Service API component,
-with semseg (src: [semseg](https://github.com/vykozlov/semseg)).
+with semseg (src: [semseg](https://git.scc.kit.edu/deep/semseg.git)).
 
     
 # Running the container
@@ -40,7 +40,7 @@ Building the container:
 1. Get the `DEEP-OC-semseg` repository (this repo):
 
     ```bash
-    $ git clone https://github.com/vykozlov/DEEP-OC-semseg
+    $ git clone https://git.scc.kit.edu/deep/DEEP-OC-semseg
     ```
 
 2. Build the container:
