@@ -20,7 +20,7 @@ To run the Docker container directly from Docker Hub and start using the API
 simply run the following command:
 
 ```bash
-$ docker run -ti -p 5000:5000 vykozlov/deep-oc-semseg
+$ docker run -ti -p 5000:5000 vykozlov/deep-oc-semseg:test
 ```
 
 This command will pull the Docker container from the Docker Hub
@@ -45,20 +45,20 @@ Building the container:
 1. Get the `DEEP-OC-semseg` repository (this repo):
 
     ```bash
-    $ git clone https://github.com/vykozlov/DEEP-OC-semseg
+    $ git clone -b test https://git.scc.kit.edu/deep/DEEP-OC-semseg
     ```
 
 2. Build the container:
 
     ```bash
     $ cd DEEP-OC-semseg
-    $ docker build -t vykozlov/deep-oc-semseg .
+    $ docker build -t vykozlov/deep-oc-semseg:test .
     ```
 
 3. Run the container:
 
     ```bash
-    $ docker run -ti -p 5000:5000 vykozlov/deep-oc-semseg
+    $ docker run -ti -p 5000:5000 vykozlov/deep-oc-semseg:test
     ```
 
 These three steps will download the repository from GitHub and will build the

@@ -70,7 +70,7 @@ ENV DISABLE_AUTHENTICATION_AND_ASSUME_AUTHENTICATED_USER yes
 
 
 # Install user app:
-RUN git clone -b $branch https://github.com/vykozlov/semseg && \
+RUN git clone -b $branch https://git.scc.kit.edu/deep/semseg.git && \
     cd  semseg && \
     pip install --no-cache-dir -e . && \
     rm -rf /root/.cache/pip/* && \
