@@ -3,7 +3,8 @@
 # Copyright (c) 2017 - 2019 Karlsruhe Institute of Technology - Steinbuch Centre for Computing
 # This code is distributed under the MIT License
 # Please, see the LICENSE file
-#
+# 
+# Bash script example for submitting jobs to DEEP Testbeds
 
 topology_file="deep-oc-mesos-webdav.yml"
 
@@ -24,20 +25,33 @@ if [ ! -f $topology_file ]; then
 fi
 
 ### EXAMPLES FOR SOME PARAMETERS
-# GPU command versions:
-# "run_command": "jupyterPORT=$PORT2 /run_jupyter.sh --allow-root",
-# "run_command": "deepaas-run --listen-port=0.0.0.0 --listen-port=$PORT0",
+# For CPU:
+# "docker_image": "deephdc/deep-oc-semseg:latest",
+# "num_gpus": "0",
+# ## run_command options: ##
+# "run_command": "deepaas-run --listen-port=0.0.0.0",
+# "run_command": "/srv/.debug_log/debug_log.sh --deepaas_port=5000 --remote_dir=rshare:/Logs/",
+# "run_command": "/srv/.jupyter/run_jupyter.sh --allow-root",
 ###
-# Jupyter possible config:
-# "jupyter_pass": "s3cret",
-# "jupyter_config_url": "deepnc:/Datasets/jupyter"
+# For GPU:
+# "docker_image": "deephdc/deep-oc-semseg:gpu",
+# "num_gpus": "1",
+# ## run_command options: ##
+# "run_command": "deepaas-run --listen-port=0.0.0.0 --listen-port=$PORT0",
+# "run_command": "/srv/.debug_log/debug_log.sh --deepaas_port=$PORT0 --remote_dir=rshare:/Logs/",
+# "run_command": "jupyterPORT=$PORT2 /srv/.jupyter/run_jupyter.sh --allow-root",
+###
+# For Jupyter add jupyter_password!:
+# "jupyter_password": "my_s3cret",
+# You may load jupyter's config from an external URL:
+# "jupyter_config_url": "rshare:/Datasets/jupyter"
 ###
 
 ### MAIN CALL FOR THE DEPLOYMENT
 #   DEFINE PARAMETERS OF YOUR DEPLOYMENT HERE
 #
-orchent depcreate $topology_file '{ "docker_image": "deephdc/deep-oc-semseg:cpu",
-                                    "mem_size": "4096 MB",
+orchent depcreate $topology_file '{ "docker_image": "deephdc/deep-oc-semseg:latest",
+                                    "mem_size": "8192 MB",
                                     "num_cpus": "1",
                                     "num_gpus": "0",
                                     "run_command": "deepaas-run --listen-ip=0.0.0.0",
@@ -45,5 +59,5 @@ orchent depcreate $topology_file '{ "docker_image": "deephdc/deep-oc-semseg:cpu"
                                     "rclone_conf": "/srv/.rclone/rclone.conf",
                                     "rclone_url": "https://nc.deep-hybrid-datacloud.eu/remote.php/webdav/",
                                     "rclone_user": "DEEP-XYXYXYXYXYXYXYXYXYXY",
-                                    "rclone_pass": "jXYXYXYXYXYXYXYXYXYXYXYX" }'
+                                    "rclone_password": "jXYXYXYXYXYXYXYXYXYXYXYX" }'
 
