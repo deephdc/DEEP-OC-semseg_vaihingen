@@ -35,7 +35,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/* && \
-    if [ $pyVer = "python3" ] ; then \
+    if [ "$pyVer" = "python3" ] ; then \
        if [ ! -e /usr/bin/pip ]; then \
           ln -s /usr/bin/pip3 /usr/bin/pip; \
        fi; \
