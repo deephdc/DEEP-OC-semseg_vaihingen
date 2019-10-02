@@ -4,16 +4,16 @@ version: '2.3'
 # do not forget '--service-ports'!
 
 services:
-    semseg:
-      image: deephdc/deep-oc-semseg
+    semseg_vaihingen:
+      image: deephdc/deep-oc-semseg_vaihingen
       ports:
         - 5000:5000
         - 6006:6006
       entrypoint: ["deepaas-run", "--listen-ip=0.0.0.0"]
 
 
-    semseg-gpu:
-      image: deephdc/deep-oc-semseg:gpu
+    semseg_vaihingen-gpu:
+      image: deephdc/deep-oc-semseg_vaihingen:gpu
       runtime: nvidia
       ports:
         - 5000:5000
@@ -21,9 +21,9 @@ services:
       entrypoint: ["deepaas-run", "--listen-ip=0.0.0.0"]
 
 
-    semseg-rclone:
+    semseg_vaihingen-rclone:
       extends:
-        service: semseg
+        service: semseg_vaihingen
       volumes:
         - $HOME/.config/rclone:/srv/.rclone
       environment:

@@ -15,7 +15,7 @@ LABEL version='0.1.0'
 ARG branch=master
 
 # If to install JupyterLab
-ARG jlab=false
+ARG jlab=true
 
 # Install ubuntu updates and python related stuff
 # link python3 to python, pip3 to pip, if needed
@@ -78,14 +78,14 @@ RUN git clone https://github.com/deephdc/deep-debug_log /srv/.debug_log
 ENV JUPYTER_CONFIG_DIR /srv/.jupyter/
 # Necessary for the Jupyter Lab terminal
 ENV SHELL /bin/bash
-RUN if [ "x$jlab" ]; then \
+RUN if [ "$jlab" = true ]; then \
        pip install --no-cache-dir jupyterlab ; \
        git clone https://github.com/deephdc/deep-jupyter /srv/.jupyter ; \
     else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app:
-RUN git clone -b $branch https://git.scc.kit.edu/deep/semseg.git && \
-    cd  semseg && \
+RUN git clone -b $branch https://git.scc.kit.edu/deep/semseg_vaihingen.git && \
+    cd  semseg_vaihingen && \
     pip install --no-cache-dir -e . && \
     rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/* && \
