@@ -1,5 +1,5 @@
 {
-    "title": "DEEP OC semseg",
+    "title": "DEEP OC semseg_vaihingen",
     "summary": "This is semantic segmentation application using DEEPaaS API",
     "description": [
 		"Example application for ISPRS 2D Semantic Labeling Contest [1]"
@@ -24,13 +24,13 @@
     "license": "MIT",
     "date_creation": "2019-09-30",
     "sources": {
-		"dockerfile_repo": "https://github.com/deephdc/DEEP-OC-semseg",
-		"docker_registry_repo": "deephdc/deep-oc-semseg",
-		"code": "https://github.com/deephdc/semseg"
+		"dockerfile_repo": "https://github.com/deephdc/DEEP-OC-semseg_vaihingen",
+		"docker_registry_repo": "deephdc/deep-oc-semseg_vaihingen",
+		"code": "https://github.com/deephdc/semseg_vaihingen"
 	},
     "continuous_integration": {
-        "build_status_badge": "https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/DEEP-OC-semseg/master",
-        "build_status_url": "https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/DEEP-OC-semseg/job/master"
+        "build_status_badge": "https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/DEEP-OC-semseg_vaihingen/master",
+        "build_status_url": "https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/DEEP-OC-semseg_vaihingen/job/master"
     },
     "tosca": [
         {

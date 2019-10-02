@@ -26,7 +26,7 @@ fi
 
 ### EXAMPLES FOR SOME PARAMETERS
 # For CPU:
-# "docker_image": "deephdc/deep-oc-semseg:latest",
+# "docker_image": "deephdc/deep-oc-semseg_vaihingen:latest",
 # "num_gpus": "0",
 # ## run_command options: ##
 # "run_command": "deepaas-run --listen-port=0.0.0.0",
@@ -34,7 +34,7 @@ fi
 # "run_command": "/srv/.jupyter/run_jupyter.sh --allow-root",
 ###
 # For GPU:
-# "docker_image": "deephdc/deep-oc-semseg:gpu",
+# "docker_image": "deephdc/deep-oc-semseg_vaihingen:gpu",
 # "num_gpus": "1",
 # ## run_command options: ##
 # "run_command": "deepaas-run --listen-port=0.0.0.0 --listen-port=$PORT0",
@@ -50,7 +50,7 @@ fi
 ### MAIN CALL FOR THE DEPLOYMENT
 #   DEFINE PARAMETERS OF YOUR DEPLOYMENT HERE
 #
-orchent depcreate $topology_file '{ "docker_image": "deephdc/deep-oc-semseg:latest",
+orchent depcreate $topology_file '{ "docker_image": "deephdc/deep-oc-semseg_vaihingen:latest",
                                     "mem_size": "8192 MB",
                                     "num_cpus": "1",
                                     "num_gpus": "0",

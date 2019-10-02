@@ -1,10 +1,15 @@
-DEEP-OC-semseg
+DEEP-OC-semseg_vaihingen
 ============================================
 
 ![DEEP-Hybrid-DataCloud logo](https://docs.deep-hybrid-datacloud.eu/en/latest/_static/logo.png)
 
+----
+**Be careful, still being evaluated!**
+
+----
+
 This is a container that will simply run the DEEP as a Service API component,
-with semseg (src: [semseg](https://git.scc.kit.edu/deep/semseg.git)).
+with semseg_vaihingen (src: [semseg_vaihingen](https://github.com/deephdc/semseg_vaihingen)).
 
     
 # Running the container
@@ -15,11 +20,11 @@ To run the Docker container directly from Docker Hub and start using the API
 simply run the following command:
 
 ```bash
-$ docker run -ti -p 5000:5000 vykozlov/deep-oc-semseg
+$ docker run -ti -p 5000:5000 deephdc/deep-oc-semseg_vaihingen:test
 ```
 
 This command will pull the Docker container from the Docker Hub
-[vykozlov](https://hub.docker.com/u/vykozlov/) repository and start the default command (deepaas-run --listen-ip=0.0.0.0).
+[deephdc](https://hub.docker.com/u/deephdc/) repository and start the default command (deepaas-run --listen-ip=0.0.0.0).
 
 ## Running via docker-compose
 
@@ -37,23 +42,23 @@ to modify the `Dockerfile` for instance) follow the following instructions:
 
 Building the container:
 
-1. Get the `DEEP-OC-semseg` repository (this repo):
+1. Get the `DEEP-OC-semseg_vaihingen` repository (this repo):
 
     ```bash
-    $ git clone https://git.scc.kit.edu/deep/DEEP-OC-semseg
+    $ git clone -b test https://git.scc.kit.edu/deep/DEEP-OC-semseg_vaihingen
     ```
 
 2. Build the container:
 
     ```bash
-    $ cd DEEP-OC-semseg
-    $ docker build -t vykozlov/deep-oc-semseg .
+    $ cd DEEP-OC-semseg_vaihingen
+    $ docker build -t deephdc/deep-oc-semseg_vaihingen:test .
     ```
 
 3. Run the container:
 
     ```bash
-    $ docker run -ti -p 5000:5000 vykozlov/deep-oc-semseg
+    $ docker run -ti -p 5000:5000 deephdc/deep-oc-semseg_vaihingen:test
     ```
 
 These three steps will download the repository from GitHub and will build the
