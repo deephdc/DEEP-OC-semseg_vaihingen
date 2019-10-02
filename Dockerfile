@@ -1,5 +1,6 @@
 # Dockerfile may have two Arguments: tag, branch
 # tag - tag for the Base image, (e.g. 1.10.0-py3 for tensorflow)
+# pyVer - python versions as 'python' or 'python3'
 # branch - user repository branch to clone (default: master, other option: test)
 
 ARG tag=1.12.0
@@ -10,6 +11,9 @@ FROM tensorflow/tensorflow:${tag}
 LABEL maintainer='G.Cavallaro (FZJ), M.Goetz (KIT), V.Kozlov (KIT)'
 LABEL version='0.1.0'
 # 2D semantic segmentation (Vaihingen dataset)
+
+# it is still python2 code...
+ARG pyVer=python
 
 # What user branch to clone (!)
 ARG branch=master
@@ -24,14 +28,14 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
          git \
          curl \
          wget \
-         python-setuptools \
-         python-pip \
-         python-wheel && \ 
+         $pyVer-setuptools \
+         $pyVer-pip \
+         $pyVer-wheel && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/* && \
-    if [ "python" = "python3" ] ; then \
+    if [ $pyVer = "python3" ] ; then \
        if [ ! -e /usr/bin/pip ]; then \
           ln -s /usr/bin/pip3 /usr/bin/pip; \
        fi; \

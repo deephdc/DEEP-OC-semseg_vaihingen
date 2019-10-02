@@ -14,6 +14,12 @@ pipeline {
     }
 
     stages {
+        stage('Validate metadata') {
+            steps {
+                checkout scm
+                sh 'deep-app-schema-validator metadata.json'
+            }
+        }
         stage('Docker image building') {
             when {
                 anyOf {
@@ -33,12 +39,14 @@ pipeline {
                        id_cpu = DockerBuild(id,
                                             tag: ['latest', 'cpu'], 
                                             build_args: ["tag=${env.base_cpu_tag}",
+                                                         "pyVer=python",
                                                          "branch=master"])
 
                        // GPU
                        id_gpu = DockerBuild(id,
                                             tag: ['gpu'], 
                                             build_args: ["tag=${env.base_gpu_tag}",
+                                                         "pyVer=python",
                                                          "branch=master"])
                     }
 
@@ -47,12 +55,14 @@ pipeline {
                        id_cpu = DockerBuild(id,
                                             tag: ['test', 'cpu-test'], 
                                             build_args: ["tag=${env.base_cpu_tag}",
+                                                         "pyVer=python",
                                                          "branch=test"])
 
                        // GPU
                        id_gpu = DockerBuild(id,
                                             tag: ['gpu-test'], 
                                             build_args: ["tag=${env.base_gpu_tag}",
+                                                         "pyVer=python",
                                                          "branch=test"])
                     }
 
@@ -87,6 +97,20 @@ pipeline {
                 }
                 always {
                     cleanWs()
+                }
+            }
+        }
+        stage("Render metadata on the marketplace") {
+            when {
+                allOf {
+                    branch 'master'
+                    changeset 'metadata.json'
+                }
+            }
+            steps {
+                script {
+                    def job_result = JenkinsBuildJob("Pipeline-as-code/deephdc.github.io/pelican")
+                    job_result_url = job_result.absoluteUrl
                 }
             }
         }
