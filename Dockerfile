@@ -64,6 +64,8 @@ RUN wget https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
     rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/*
 
+ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
+
 # Install DEEPaaS from PyPi
 # Install FLAAT (FLAsk support for handling Access Tokens)
 RUN pip install --no-cache-dir \
