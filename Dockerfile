@@ -8,8 +8,8 @@ ARG tag=1.12.0
 # Base image, e.g. tensorflow/tensorflow:1.12.0-py3
 FROM tensorflow/tensorflow:${tag}
 
-LABEL maintainer='G.Cavallaro (FZJ), M.Goetz (KIT), V.Kozlov (KIT)'
-LABEL version='0.1.0'
+LABEL maintainer='G.Cavallaro (FZJ), M.Goetz (KIT), V.Kozlov (KIT), A.Grupp (KIT)'
+LABEL version='0.3.0'
 # 2D semantic segmentation (Vaihingen dataset)
 
 # it is still python2 code...
@@ -19,7 +19,7 @@ ARG pyVer=python
 ARG branch=master
 
 # If to install JupyterLab
-ARG jlab=true
+ARG jlab=false
 
 # Install ubuntu updates and python related stuff
 # link python3 to python, pip3 to pip, if needed
@@ -63,6 +63,8 @@ RUN wget https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/*
+
+ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
 # Install DEEPaaS from PyPi
 # Install FLAAT (FLAsk support for handling Access Tokens)
