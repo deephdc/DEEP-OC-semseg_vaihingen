@@ -19,7 +19,7 @@ ARG pyVer=python
 ARG branch=master
 
 # If to install JupyterLab
-ARG jlab=true
+ARG jlab=false
 
 # Install ubuntu updates and python related stuff
 # link python3 to python, pip3 to pip, if needed
