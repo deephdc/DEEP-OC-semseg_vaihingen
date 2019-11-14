@@ -5,9 +5,6 @@ DEEP-OC-semseg_vaihingen
 
 [![Build Status](https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code%2FDEEP-OC-org%2FDEEP-OC-semseg_vaihingen%2Ftest)](https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/DEEP-OC-semseg_vaihingen/job/test/)
 ----
-**Be careful, 'test' branch!**
-
-----
 
 This is a container that will simply run the DEEP as a Service API component,
 with semseg_vaihingen (src: [semseg_vaihingen](https://github.com/deephdc/semseg_vaihingen)).
