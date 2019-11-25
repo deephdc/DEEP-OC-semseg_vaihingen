@@ -8,7 +8,7 @@ pipeline {
     }
 
     environment {
-        dockerhub_repo = "deephdc/deep-oc-semseg_vaihingen"
+        dockerhub_repo = "vykozlov/deep-oc-semseg_vaihingen"
         base_cpu_tag = "1.12.0"
         base_gpu_tag = "1.12.0-gpu"
     }
@@ -98,6 +98,8 @@ pipeline {
             }
             steps{
                 script {
+                    sh "bash docker images"
+                    sh "bash docker ps -a"
                     DockerPush(id_cpu)
                     DockerPush(id_gpu)
                 }
