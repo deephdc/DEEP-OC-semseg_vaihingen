@@ -29,6 +29,9 @@ pipeline {
                }
             }
             steps{
+                dir('check_oc_artifact'){
+                    git url: 'https://github.com/deephdc/deep-check_oc_artifact'
+                }
                 checkout scm
                 script {
                     // build different tags
@@ -42,7 +45,7 @@ pipeline {
                                                          "pyVer=python",
                                                          "branch=master"])
                        // Check that default CMD is correct by starting the image
-                       sh "bash ./check_docker_start.sh ${env.dockerhub_repo}"
+                       sh "bash ../check_oc_artifact/check_artifact.sh ${env.dockerhub_repo}"
 
                        // GPU
                        id_gpu = DockerBuild(id,
@@ -60,7 +63,7 @@ pipeline {
                                                          "pyVer=python",
                                                          "branch=test"])
                        // Check that default CMD is correct by starting the image
-                       sh "bash ./check_docker_start.sh ${env.dockerhub_repo}:test"
+                       sh "bash ../check_oc_artifact/check_artifact.sh ${env.dockerhub_repo}:test"
 
                        // GPU
                        id_gpu = DockerBuild(id,
