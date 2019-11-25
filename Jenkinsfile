@@ -69,11 +69,11 @@ pipeline {
                            sh "bash ../check_oc_artifact/check_artifact.sh ${env.dockerhub_repo}:test"
 
                            // GPU
-                           //-id_gpu = DockerBuild(id,
-                           //-                 tag: ['gpu-test'], 
-                           //-                 build_args: ["tag=${env.base_gpu_tag}",
-                           //-                              "pyVer=python",
-                           //-                              "branch=test"])
+                           id_gpu = DockerBuild(id,
+                                            tag: ['gpu-test'], 
+                                            build_args: ["tag=${env.base_gpu_tag}",
+                                                         "pyVer=python",
+                                                         "branch=test"])
                         }
 
                     }
