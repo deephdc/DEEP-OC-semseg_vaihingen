@@ -98,8 +98,8 @@ pipeline {
             }
             steps{
                 script {
-                    sh "bash docker images"
-                    sh "bash docker ps -a"
+                    sh "docker images"
+                    sh "docker ps -a"
                     DockerPush(id_cpu)
                     DockerPush(id_gpu)
                 }
