@@ -73,7 +73,7 @@ pipeline {
                            //-                 tag: ['gpu-test'], 
                            //-                 build_args: ["tag=${env.base_gpu_tag}",
                            //-                              "pyVer=python",
-                                                         "branch=test"])
+                           //-                              "branch=test"])
                         }
 
                     }
