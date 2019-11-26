@@ -100,7 +100,6 @@ RUN if [ "$jlab" = true ]; then \
     else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app:
-#RUN git clone -b $branch https://git.scc.kit.edu/deep/semseg_vaihingen.git && \
 RUN git clone -b $branch https://github.com/deephdc/semseg_vaihingen.git && \
     cd  semseg_vaihingen && \
     pip install --no-cache-dir -e . && \
