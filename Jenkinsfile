@@ -98,6 +98,7 @@ pipeline {
             }
             steps{
                 script {
+                    // finally push images to Docker Hub
                     DockerPush(id_cpu)
                     DockerPush(id_gpu)
                 }
