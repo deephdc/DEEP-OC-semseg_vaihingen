@@ -2,6 +2,16 @@
 # tag - tag for the Base image, (e.g. 1.10.0-py3 for tensorflow)
 # pyVer - python versions as 'python' or 'python3'
 # branch - user repository branch to clone (default: master, other option: test)
+# jlab - if to insall JupyterLab (true) or not (false, default)
+#
+# To build the image:
+# $ docker build -t <dockerhub_user>/<dockerhub_repo> --build-arg arg=value .
+# or using default args:
+# $ docker build -t <dockerhub_user>/<dockerhub_repo> .
+#
+# Be Aware! For the Jenkins CI/CD pipeline, 
+# input args are defined inside the Jenkinsfile, not here!
+#
 
 ARG tag=1.12.0
 
@@ -90,7 +100,6 @@ RUN if [ "$jlab" = true ]; then \
     else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app:
-#RUN git clone -b $branch https://git.scc.kit.edu/deep/semseg_vaihingen.git && \
 RUN git clone -b $branch https://github.com/deephdc/semseg_vaihingen.git && \
     cd  semseg_vaihingen && \
     pip install --no-cache-dir -e . && \
