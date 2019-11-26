@@ -8,7 +8,7 @@ pipeline {
     }
 
     environment {
-        dockerhub_repo = "deephdc/deep-oc-semseg_vaihingen"
+        dockerhub_repo = "vykozlov/deep-oc-semseg_vaihingen"
         base_cpu_tag = "1.12.0"
         base_gpu_tag = "1.12.0-gpu"
     }
@@ -29,43 +29,54 @@ pipeline {
                }
             }
             steps{
-                checkout scm
-                script {
-                    // build different tags
-                    id = "${env.dockerhub_repo}"
+                dir('check_oc_artifact'){
+                    // clone checking scripts
+                    git url: 'https://github.com/deephdc/deep-check_oc_artifact'
+                }
+                dir('deep-oc-user_app'){
+                    // clone user application
+                    checkout scm
+                    script {
+                        // build different tags
+                        id = "${env.dockerhub_repo}"
 
-                    if (env.BRANCH_NAME == 'master') {
-                       // CPU (aka latest, i.e. default)
-                       id_cpu = DockerBuild(id,
+                        if (env.BRANCH_NAME == 'master') {
+                           // CPU (aka latest, i.e. default)
+                           id_cpu = DockerBuild(id,
                                             tag: ['latest', 'cpu'], 
                                             build_args: ["tag=${env.base_cpu_tag}",
                                                          "pyVer=python",
                                                          "branch=master"])
+                           // Check that default CMD is correct by starting the image
+                           sh "bash ../check_oc_artifact/check_artifact.sh ${env.dockerhub_repo}"
 
-                       // GPU
-                       id_gpu = DockerBuild(id,
+                           // GPU
+                           id_gpu = DockerBuild(id,
                                             tag: ['gpu'], 
                                             build_args: ["tag=${env.base_gpu_tag}",
                                                          "pyVer=python",
                                                          "branch=master"])
-                    }
+                        }
 
-                    if (env.BRANCH_NAME == 'test') {
-                       // CPU
-                       id_cpu = DockerBuild(id,
+                        if (env.BRANCH_NAME == 'test') {
+                           // CPU
+                           id_cpu = DockerBuild(id,
                                             tag: ['test', 'cpu-test'], 
                                             build_args: ["tag=${env.base_cpu_tag}",
                                                          "pyVer=python",
                                                          "branch=test"])
+                           // Check that default CMD is correct by starting the image
+                           sh "bash ../check_oc_artifact/check_artifact.sh ${env.dockerhub_repo}:test"
 
-                       // GPU
-                       id_gpu = DockerBuild(id,
+                           // GPU
+                           id_gpu = DockerBuild(id,
                                             tag: ['gpu-test'], 
                                             build_args: ["tag=${env.base_gpu_tag}",
                                                          "pyVer=python",
                                                          "branch=test"])
-                    }
+                        }
 
+                    }
                 }
             }
             post {
@@ -87,6 +98,8 @@ pipeline {
             }
             steps{
                 script {
+                    sh "docker images"
+                    sh "docker ps -a"
                     DockerPush(id_cpu)
                     DockerPush(id_gpu)
                 }
