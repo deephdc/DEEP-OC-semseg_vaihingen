@@ -79,7 +79,7 @@ ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 # Install DEEPaaS from PyPi
 # Install FLAAT (FLAsk support for handling Access Tokens)
 RUN pip install --no-cache-dir \
-        'deepaas>=0.5.0' \
+        'deepaas==0.5.1' \
         flaat && \
     rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/*
@@ -114,5 +114,5 @@ EXPOSE 5000
 # Open Monitoring  and Jupyter ports
 EXPOSE 6006 8888
 
-# Account for OpenWisk functionality (deepaas >=0.5.0)
+# Account for OpenWisk functionality (deepaas 0.5.1)
 CMD ["deepaas-run", "--openwhisk-detect", "--listen-ip", "0.0.0.0", "--listen-port", "5000"]
