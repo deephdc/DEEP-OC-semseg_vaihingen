@@ -23,7 +23,7 @@ LABEL version='0.3.0'
 # 2D semantic segmentation (Vaihingen dataset)
 
 # it is still python2 code...
-ARG pyVer=python
+ARG pyVer=python3
 
 # What user branch to clone (!)
 ARG branch=api_v2
