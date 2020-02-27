@@ -26,7 +26,7 @@ LABEL version='0.3.0'
 ARG pyVer=python
 
 # What user branch to clone (!)
-ARG branch=master
+ARG branch=api_v2
 
 # If to install JupyterLab
 ARG jlab=false
@@ -79,7 +79,7 @@ ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 # Install DEEPaaS from PyPi
 # Install FLAAT (FLAsk support for handling Access Tokens)
 RUN pip install --no-cache-dir \
-        'deepaas==0.5.1' \
+        'deepaas>=1.0.0' \
         flaat && \
     rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/*
@@ -100,7 +100,7 @@ RUN if [ "$jlab" = true ]; then \
     else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app:
-RUN git clone -b $branch https://github.com/deephdc/semseg_vaihingen.git && \
+RUN git clone -b $branch https://github.com/silkedh/semseg_vaihingen.git && \
     cd  semseg_vaihingen && \
     pip install --no-cache-dir -e . && \
     rm -rf /root/.cache/pip/* && \
