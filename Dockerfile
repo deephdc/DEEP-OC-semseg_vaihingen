@@ -78,11 +78,18 @@ ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
 # Install DEEPaaS from PyPi
 # Install FLAAT (FLAsk support for handling Access Tokens)
-RUN pip install --no-cache-dir \
-        'deepaas>=1.0.0' \
-        flaat && \
-    rm -rf /root/.cache/pip/* && \
-    rm -rf /tmp/*
+#RUN pip install --no-cache-dir \
+#        'deepaas>=1.0.0' \
+#        flaat && \
+#    rm -rf /root/.cache/pip/* && \
+#    rm -rf /tmp/*
+    
+RUN git clone master https://github.com/indigo-dc/deepaas && \
+ 	cd deepaas && \
+ 	pip install --no-cache-dir -U . && \
+ 	rm -rf /root/.cache/pip/* && \
+ 	rm -rf /tmp/* && \
+ 	cd ..
 
 # Disable FLAAT authentication by default
 ENV DISABLE_AUTHENTICATION_AND_ASSUME_AUTHENTICATED_USER yes
