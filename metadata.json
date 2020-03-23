@@ -25,7 +25,7 @@
         "trainable",
         "inference",
         "pre-trained",
-        "api-v1"
+        "api-v2"
     ],
     "license": "MIT",
     "date_creation": "2019-09-30",
