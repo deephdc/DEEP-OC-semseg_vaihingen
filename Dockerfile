@@ -13,23 +13,25 @@
 # input args are defined inside the Jenkinsfile, not here!
 #
 
-ARG tag=1.12.0
+ARG tag=1.12.0-py36
+#ARG tag=1.12.0
 
 # Base image, e.g. tensorflow/tensorflow:1.12.0-py3
-FROM tensorflow/tensorflow:${tag}
+FROM deephdc/tensorflow:${tag}
+#FROM tensorflow/tensorflow:${tag}
 
 LABEL maintainer='G.Cavallaro (FZJ), M.Goetz (KIT), V.Kozlov (KIT), A.Grupp (KIT)'
 LABEL version='0.3.0'
 # 2D semantic segmentation (Vaihingen dataset)
 
-# it is still python2 code...
-ARG pyVer=python
+# python version
+ARG pyVer=python3
 
 # What user branch to clone (!)
-ARG branch=master
+ARG branch=api_v2
 
 # If to install JupyterLab
-ARG jlab=false
+ARG jlab=true
 
 # Install ubuntu updates and python related stuff
 # link python3 to python, pip3 to pip, if needed
@@ -56,7 +58,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     python --version && \
     pip --version
 
-
 # Set LANG environment
 ENV LANG C.UTF-8
 
@@ -79,10 +80,18 @@ ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 # Install DEEPaaS from PyPi
 # Install FLAAT (FLAsk support for handling Access Tokens)
 RUN pip install --no-cache-dir \
-        'deepaas>=0.5.0' \
-        flaat && \
+#        'deepaas>=1.0.0' \ 
+	flaat  && \
     rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/*
+
+RUN git clone https://github.com/indigo-dc/deepaas && \
+ 	cd deepaas && \
+ 	pip install --no-cache-dir -U . && \
+ 	rm -rf /root/.cache/pip/* && \
+ 	rm -rf /tmp/* && \
+ 	cd ..
+
 
 # Disable FLAAT authentication by default
 ENV DISABLE_AUTHENTICATION_AND_ASSUME_AUTHENTICATED_USER yes
@@ -100,7 +109,7 @@ RUN if [ "$jlab" = true ]; then \
     else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app:
-RUN git clone -b $branch https://github.com/deephdc/semseg_vaihingen.git && \
+RUN git clone -b $branch https://github.com/silkedh/semseg_vaihingen.git && \
     cd  semseg_vaihingen && \
     pip install --no-cache-dir -e . && \
     rm -rf /root/.cache/pip/* && \
@@ -114,5 +123,5 @@ EXPOSE 5000
 # Open Monitoring  and Jupyter ports
 EXPOSE 6006 8888
 
-# Account for OpenWisk functionality (deepaas >=0.5.0)
+# Account for OpenWisk functionality
 CMD ["deepaas-run", "--openwhisk-detect", "--listen-ip", "0.0.0.0", "--listen-port", "5000"]
