@@ -28,7 +28,7 @@ LABEL version='0.3.0'
 ARG pyVer=python3
 
 # What user branch to clone (!)
-ARG branch=api_v2
+ARG branch=master
 
 # If to install JupyterLab
 ARG jlab=true
@@ -109,7 +109,7 @@ RUN if [ "$jlab" = true ]; then \
     else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app:
-RUN git clone -b $branch https://github.com/silkedh/semseg_vaihingen.git && \
+RUN git clone -b $branch https://github.com/deephdc/semseg_vaihingen.git && \
     cd  semseg_vaihingen && \
     pip install --no-cache-dir -e . && \
     rm -rf /root/.cache/pip/* && \
