@@ -1,6 +1,6 @@
 {
-    "title": "semseg_vaihingen",
-    "summary": "2D semantic segmentation on the Vaihingen dataset",
+    "title": "2D semantic segmentation",
+    "summary": "2D semantic segmentation trained on the Vaihingen dataset",
     "description": [
 	   "Example application for ISPRS 2D Semantic Labeling Contest [1]:\n",
            "2D semantic segmentation (Vaihingen dataset [2]) that assigns labels to multiple object categories.\n\n",
@@ -25,7 +25,7 @@
         "trainable",
         "inference",
         "pre-trained",
-        "api-v1"
+        "api-v2"
     ],
     "license": "MIT",
     "date_creation": "2019-09-30",
@@ -41,8 +41,8 @@
     },
     "tosca": [
         {
-            "title": "Mesos (CPU)",
-            "url": "https://raw.githubusercontent.com/indigo-dc/tosca-templates/master/deep-oc/deep-oc-mesos-webdav.yml",
+            "title": "Marathon",
+            "url": "https://raw.githubusercontent.com/indigo-dc/tosca-templates/master/deep-oc/deep-oc-marathon.yml",
             "inputs": [
                 "rclone_conf",
                 "rclone_url",
