@@ -28,7 +28,7 @@
         "api-v2"
     ],
     "license": "MIT",
-    "date_creation": "2019-09-30",
+    "date_creation": "2019-09-29",
     "dataset_url": "http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html",
     "sources": {
 		"dockerfile_repo": "https://github.com/deephdc/DEEP-OC-semseg_vaihingen",
