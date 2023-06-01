@@ -26,8 +26,7 @@
         "inference",
         "pre-trained",
         "api-v2",
-        "image",
-        "general purpose"
+        "image"
     ],
     "license": "MIT",
     "date_creation": "2019-09-29",
